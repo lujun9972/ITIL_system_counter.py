@@ -8,13 +8,13 @@ from datetime import datetime
 
 def read_file(file):
     '''读取FILE的内容,转换成dict列表,且将其中的计划开始时间转换成datetime格式'''
-    with open(file) as f:
+    with open(file,encoding='gbk') as f:
         d = csv.DictReader(f)
         d = filter(lambda x:x['变更类别']=='应用变更',d)
         d = filter(lambda x:x['分类一级']=='应用',d)
         d = list(d)
         for i in d:
-            i['计划开始时间'] = datetime.strptime(i['计划开始时间'],'%Y-%m-%d %H:%M')
+            i['计划开始时间'] = datetime.strptime(i['计划开始时间'],'%Y/%m/%d %H:%M')
         return list(d)
 
 def filter_by_start_time(d,start,end):
@@ -56,7 +56,7 @@ def count_from_file(csv_file):
         week_records = filter_by_start_time(records,*week_range)
         week_counter = counter(week_records)
         d[week_range] = week_counter
-        return d
+    return d
 
 def output_count(count):
     '''输出统计结果'''
