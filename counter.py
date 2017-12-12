@@ -14,7 +14,7 @@ def read_file(file):
         d = filter(lambda x:x['分类一级']=='应用',d)
         d = list(d)
         for i in d:
-            i['计划开始时间'] = datetime.strptime(i['计划开始时间'],'%Y/%m/%d %H:%M')
+            i['计划开始时间'] = datetime.strptime(i['计划开始时间'],'%Y-%m-%d %H:%M')
         return list(d)
 
 def filter_by_start_time(d,start,end):
