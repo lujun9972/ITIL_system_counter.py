@@ -9,13 +9,13 @@ from datetime import datetime
 
 def read_file(file):
     '''读取FILE的内容,转换成dict列表,且将其中的计划开始时间转换成datetime格式'''
-    with open(file, encoding='utf-8') as f:
+    with open(file, encoding='gbk') as f:
         d = csv.DictReader(f)
         d = filter(lambda x: x['变更类别'] == '应用变更', d)
         d = filter(lambda x: x['分类一级'] == '应用', d)
         d = list(d)
         for i in d:
-            i['计划开始时间'] = datetime.strptime(i['计划开始时间'], '%Y/%m/%d %H:%M')
+            i['计划开始时间'] = datetime.strptime(i['计划开始时间'], '%Y-%m-%d %H:%M:%S')
         return list(d)
 
 
